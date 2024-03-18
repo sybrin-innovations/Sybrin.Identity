@@ -14,9 +14,8 @@ let package = Package(
         
     ],
     dependencies: [
-        //.package(url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMajor(from: "10.22.1")),
-        .package(url: "https://github.com/sybrin-innovations/Sybrin.Common", branch:"main"),
-        .package(url: "https://github.com/d-date/google-mlkit-swiftpm", .upToNextMajor(from: "3.2.1")),
+        .package(url: "https://github.com/sybrin-innovations/Sybrin.Common", branch: "main"),
+//        .package(url: "https://github.com/d-date/google-mlkit-swiftpm", .upToNextMajor(from: "3.2.1")),
 //        .package(url: "https://github.com/kientux/google-mlkit-spm.git", from: "0.0.2"),
         ],
     targets: [
@@ -24,9 +23,6 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Sybrin.Identity",
-            dependencies: [.product(name: "Sybrin.Common", package: "Sybrin.Common") /* other dependencies */]),
-        .testTarget(
-            name: "Sybrin.IdentityTests",
-            dependencies: ["Sybrin.Identity"]),
+            dependencies: [.product(name: "Sybrin.Common", package: "Sybrin.Common")]),
     ]
 )

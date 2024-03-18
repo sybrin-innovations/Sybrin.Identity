@@ -7,15 +7,16 @@
 //
 import Sybrin_Common
 import AVFoundation
-//import MLKit
+import UIKit
+////import MLKit
 
 final class GenericIDCardFrontScanPhase: ScanPhase<DocumentModel> {
     
     // MARK: Private Properties
-    private final var Face: Face?
-    private final var LastFace: Face?
+//    private final var Face: Face?
+//    private final var LastFace: Face?
     private final var LastFrame: CMSampleBuffer?
-    private final var Parser = GenericIDCardParser()
+//    private final var Parser = GenericIDCardParser()
     private final var FaceDetectedCounter = 0
     private final let FaceDetectedLimit = 3
     
@@ -29,7 +30,7 @@ final class GenericIDCardFrontScanPhase: ScanPhase<DocumentModel> {
     
     // MARK: Overrided Methods
     final override func ProcessFrame(buffer: CMSampleBuffer) {
-        if Face == nil || Model == nil {
+        if /*Face == nil ||*/ Model == nil {
             LastFrame = buffer
         
             FaceDetection(from: buffer)
@@ -75,15 +76,15 @@ final class GenericIDCardFrontScanPhase: ScanPhase<DocumentModel> {
                 
                 let image = UIImage.imageFromSampleBuffer(frame, fixOrientation: true)
             
-                if let face = Face {
-                    let faceRect = SybrinIdentity.shared.configuration?.cameraPosition == .front ? face.frame.RotateRight(containerWidth: image.size.width) : face.frame.RotateLeft(containerHeight: image.size.height)
-                    
-                    let portraitImage = image.CropImage(faceRect, padding: 25)
-                    let croppedDocumentImage = image.CropImage(image.GetCropRect(model.CroppingLeftOffset, model.CroppingTopOffset, model.CroppingWidthOffset, model.CroppingHeightOffset, faceRect))
-                    
-                    model.PortraitImage = portraitImage
-                    model.CroppedDocumentImage = croppedDocumentImage
-                }
+//                if let face = Face {
+//                    let faceRect = SybrinIdentity.shared.configuration?.cameraPosition == .front ? face.frame.RotateRight(containerWidth: image.size.width) : face.frame.RotateLeft(containerHeight: image.size.height)
+//                    
+//                    let portraitImage = image.CropImage(faceRect, padding: 25)
+//                    let croppedDocumentImage = image.CropImage(image.GetCropRect(model.CroppingLeftOffset, model.CroppingTopOffset, model.CroppingWidthOffset, model.CroppingHeightOffset, faceRect))
+//                    
+//                    model.PortraitImage = portraitImage
+//                    model.CroppedDocumentImage = croppedDocumentImage
+//                }
             
                 model.DocumentImage = image
             DispatchQueue.main.async {
@@ -104,50 +105,50 @@ final class GenericIDCardFrontScanPhase: ScanPhase<DocumentModel> {
         
     }
     
-    final override func ProcessFaceDetection(faces: [Face]) {
-        
-        if faces.count >= 1 {
-            let face = faces[0]
-            LastFace = face
-            
-            if (FaceDetectedLimit <= 0) || (FaceDetectedLimit > 0 && FaceDetectedCounter >= FaceDetectedLimit) {
-                Face = faces[0]
-            }else{
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    
-                    CommonUI.updateSubLabelText(to: NotifyMessage.ScanningIn(timeRemaining: self.FaceDetectedLimit - self.FaceDetectedCounter).stringValue)
-                    
-                    self.FaceDetectedCounter += 1
-                }
-            }
-            
-            "Found Face".log(.Verbose)
-        } else{
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.FaceDetectedCounter = 0
-                CommonUI.updateSubLabelText(to:  String())
-            }
-        }
-
-    }
-    
-    final override func ProcessTextRecognition(text: Text) {
-        guard text.text.count > 0 else { return }
-        
-        Parser.ParseFront(from: text) { [weak self] (model) in
-            guard let self = self else { return }
-            
-            "Found Model".log(.Verbose)
-            self.Model = model
-        }
-    }
+//    final override func ProcessFaceDetection(faces: [Face]) {
+//        
+//        if faces.count >= 1 {
+//            let face = faces[0]
+//            LastFace = face
+//            
+//            if (FaceDetectedLimit <= 0) || (FaceDetectedLimit > 0 && FaceDetectedCounter >= FaceDetectedLimit) {
+//                Face = faces[0]
+//            }else{
+//                DispatchQueue.main.async { [weak self] in
+//                    guard let self = self else { return }
+//                    
+//                    CommonUI.updateSubLabelText(to: NotifyMessage.ScanningIn(timeRemaining: self.FaceDetectedLimit - self.FaceDetectedCounter).stringValue)
+//                    
+//                    self.FaceDetectedCounter += 1
+//                }
+//            }
+//            
+//            "Found Face".log(.Verbose)
+//        } else{
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                self.FaceDetectedCounter = 0
+//                CommonUI.updateSubLabelText(to:  String())
+//            }
+//        }
+//
+//    }
+//    
+//    final override func ProcessTextRecognition(text: Text) {
+//        guard text.text.count > 0 else { return }
+//        
+//        Parser.ParseFront(from: text) { [weak self] (model) in
+//            guard let self = self else { return }
+//            
+//            "Found Model".log(.Verbose)
+//            self.Model = model
+//        }
+//    }
     
     final override func ResetData() {
         let currentTimeMs = Date().timeIntervalSince1970 * 1000
         
-        Face = nil
+//        Face = nil
         LastFrame = nil
         FaceDetectedCounter = 0
         

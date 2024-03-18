@@ -5,6 +5,7 @@
 //  Created by Nico Celliers on 2020/10/08.
 //  Copyright © 2020 Sybrin Systems. All rights reserved.
 //
+import Foundation
 
 @objc public class PassportModel: DocumentModel {
     

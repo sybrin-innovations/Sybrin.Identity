@@ -8,7 +8,9 @@
 
 import Sybrin_Common
 import AVFoundation
-import MLKit
+import UIKit
+import Foundation
+//import MLKit
 
 final class SouthAfricaPassportScanPhase: ScanPhase<DocumentModel> {
     

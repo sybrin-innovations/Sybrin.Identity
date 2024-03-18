@@ -5,6 +5,7 @@
 //  Created by Nico Celliers on 2020/09/11.
 //  Copyright © 2020 Sybrin Systems. All rights reserved.
 //
+import Foundation
 
 final class TD1Model {
     

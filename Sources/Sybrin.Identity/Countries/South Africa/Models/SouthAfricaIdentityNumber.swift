@@ -5,7 +5,7 @@
 //  Created by Nico Celliers on 2020/10/05.
 //  Copyright © 2020 Sybrin Systems. All rights reserved.
 //
-
+import Foundation
 struct SouthAfricaIdentityNumber {
     
     // MARK: Internal Properties

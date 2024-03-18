@@ -15,7 +15,7 @@ class ScanPlan<T> {
     final var name: String { get { return Name } }
     final var status: ScanPlanStatus { get { return Status } }
     final var controller: ScanViewController? { get { return Controller } }
-    final var mlKit: MLKitHandler? { get { return MLKit } }
+    //final var mlKit: MLKitHandler? { get { return MLKit } }
     final var camera: CameraHandler? { get { return Camera } }
     final var currentPhase: ScanPhase<T>? { get { return PhasesList?.activePhase } }
     
@@ -30,7 +30,7 @@ class ScanPlan<T> {
     private final weak var Controller: ScanViewController?
     private final weak var Delegate: ScanPlanDelegate?
     private final var Camera: CameraHandler?
-    private final var MLKit: MLKitHandler?
+    //private final var MLKit: MLKitHandler?
     private final var PhasesList: ScanPhaseList<T>?
     
     //
@@ -187,7 +187,7 @@ class ScanPlan<T> {
             
             "Configuring MLKitHandler".log(.Debug)
             
-            MLKit = MLKitHandler()
+            //MLKit = MLKitHandler()
             
             "Configuring CameraHandler".log(.Debug)
             
@@ -222,7 +222,7 @@ class ScanPlan<T> {
     
     private final func StartPhase() {
         guard let phase = currentPhase else { return }
-        guard let MLKit = MLKit else { return }
+        //guard let MLKit = MLKit else { return }
         guard let Camera = Camera else { return }
         
         let previousPhase = phase.PreviousPhase
@@ -235,7 +235,7 @@ class ScanPlan<T> {
         
         "Setting MLKitHandler delegate".log(.Debug)
         
-        MLKit.Delegate = phase
+        //MLKit.Delegate = phase
         
         "Setting CameraHandler delegate".log(.Debug)
         

@@ -10,7 +10,7 @@ import Foundation
 import Sybrin_Common
 import UIKit
 import AVFoundation
-//import MLKit
+////import MLKit
 
 class SouthAfricaIDCardNetworkPhase: ScanPhase<DocumentModel> {
     

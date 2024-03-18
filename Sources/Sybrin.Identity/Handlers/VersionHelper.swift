@@ -7,6 +7,7 @@
 //
 
 import Sybrin_Common
+import Foundation
 
 struct VersionHelper {
     

@@ -5,7 +5,8 @@
 //  Created by Armand Riley on 2021/09/17.
 //  Copyright © 2021 Sybrin Systems. All rights reserved.
 //
-//import MLKit
+////import MLKit
+import Foundation
 
 struct GenericDocumentParser {
     

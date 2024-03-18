@@ -6,8 +6,8 @@
 //  Copyright © 2020 Sybrin Systems. All rights reserved.
 //
 
-//import MLKit
-
+////import MLKit
+import Foundation
 struct SouthAfricaIdentityNumberParser {
     
     // MARK: Parse Methods

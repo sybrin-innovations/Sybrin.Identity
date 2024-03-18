@@ -5,6 +5,7 @@
 //  Created by Nico Celliers on 2021/05/01.
 //  Copyright © 2021 Sybrin Systems. All rights reserved.
 //
+import Foundation
 
 extension Date {
 

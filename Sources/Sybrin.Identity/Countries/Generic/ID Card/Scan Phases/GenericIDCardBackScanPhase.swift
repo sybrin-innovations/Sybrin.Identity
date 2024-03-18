@@ -7,15 +7,17 @@
 //
 import Sybrin_Common
 import AVFoundation
-//import MLKit
+import UIKit
+
+////import MLKit
 
 final class GenericIDCardBackScanPhase: ScanPhase<DocumentModel> {
     
     // MARK: Private Properties
-    private final var Face: Face?
-    private final var LastFace: Face?
+//    private final var Face: Face?
+//    private final var LastFace: Face?
     private final var LastFrame: CMSampleBuffer?
-    private final var Parser = GenericIDCardParser()
+//    private final var Parser = GenericIDCardParser()
     private final var TextDetectedCounter = 0
     private final let TextDetectedLimit = 3
     
@@ -95,37 +97,37 @@ final class GenericIDCardBackScanPhase: ScanPhase<DocumentModel> {
         
     }
     
-    final override func ProcessTextRecognition(text: Text) {
-        if text.text.count > 0 {
-            
-            if (TextDetectedLimit <= 0) || (TextDetectedLimit > 0 && TextDetectedCounter >= TextDetectedLimit) {
-                
-                Parser.ParseBack(from: text) { [weak self] (model) in
-                    guard let self = self else { return }
-                    
-                    "Found Model".log(.Verbose)
-                    self.Model = model
-                }
-                
-            }else{
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    
-                    CommonUI.updateSubLabelText(to: NotifyMessage.ScanningIn(timeRemaining: self.TextDetectedLimit - self.TextDetectedCounter).stringValue)
-                    
-                    self.TextDetectedCounter += 1
-                }
-            }
-            
-            "Found Face".log(.Verbose)
-        } else {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.TextDetectedCounter = 0
-                CommonUI.updateSubLabelText(to: String())
-            }
-        }
-    }
+//    final override func ProcessTextRecognition(text: Text) {
+//        if text.text.count > 0 {
+//            
+//            if (TextDetectedLimit <= 0) || (TextDetectedLimit > 0 && TextDetectedCounter >= TextDetectedLimit) {
+//                
+//                Parser.ParseBack(from: text) { [weak self] (model) in
+//                    guard let self = self else { return }
+//                    
+//                    "Found Model".log(.Verbose)
+//                    self.Model = model
+//                }
+//                
+//            }else{
+//                DispatchQueue.main.async { [weak self] in
+//                    guard let self = self else { return }
+//                    
+//                    CommonUI.updateSubLabelText(to: NotifyMessage.ScanningIn(timeRemaining: self.TextDetectedLimit - self.TextDetectedCounter).stringValue)
+//                    
+//                    self.TextDetectedCounter += 1
+//                }
+//            }
+//            
+//            "Found Face".log(.Verbose)
+//        } else {
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                self.TextDetectedCounter = 0
+//                CommonUI.updateSubLabelText(to: String())
+//            }
+//        }
+//    }
     
     final override func ResetData() {
         let currentTimeMs = Date().timeIntervalSince1970 * 1000

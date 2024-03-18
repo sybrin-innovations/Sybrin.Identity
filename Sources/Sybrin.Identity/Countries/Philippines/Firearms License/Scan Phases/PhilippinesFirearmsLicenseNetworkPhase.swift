@@ -8,7 +8,7 @@
 import Sybrin_Common
 import AVFoundation
 import UIKit
-//import MLKit
+////import MLKit
 
 class PhilippinesFirearmsLicenseNetworkPhase: ScanPhase<DocumentModel> {
     

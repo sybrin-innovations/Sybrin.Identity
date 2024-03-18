@@ -8,7 +8,9 @@
 
 import Sybrin_Common
 import AVFoundation
-import MLKit
+import Foundation
+import UIKit
+//import MLKit
 
 final class SouthAfricaIDCardBackScanPhase: ScanPhase<DocumentModel> {
     

@@ -8,9 +8,10 @@
 
 import Sybrin_Common
 import AVFoundation
-import MLKit
+import UIKit
+//import MLKit
 
-class ScanPhase<T>: CameraDelegate, HandleMLKitResponse {
+class ScanPhase<T>: CameraDelegate/*, HandleMLKitResponse */{
     
     // MARK: Internal Properties
     final var name: String { get { return Name } }
@@ -169,7 +170,7 @@ class ScanPhase<T>: CameraDelegate, HandleMLKitResponse {
     
     // MARK: MLKit Methods
     final func FaceDetection(from buffer: CMSampleBuffer) {
-        guard let mlKit = Plan?.mlKit else { return }
+        //guard let mlKit = Plan?.mlKit else { return }
         
         // Throtteling detection if needed
         let currentTimeMs = Date().timeIntervalSince1970 * 1000
@@ -177,7 +178,7 @@ class ScanPhase<T>: CameraDelegate, HandleMLKitResponse {
         PreviousFaceDetectionFrameTime = currentTimeMs
         
         "Running face detection on frame \(FrameCounter)".log(.Debug)
-        mlKit.FaceDetectionUsingBufferRealtime(buffer)
+        //mlKit.FaceDetectionUsingBufferRealtime(buffer)
     }
     
     final func FaceDetectionManual(from buffer: CMSampleBuffer) {
@@ -364,9 +365,9 @@ class ScanPhase<T>: CameraDelegate, HandleMLKitResponse {
         "\(#function) not implemented (\(Name))".log(.Verbose)
     }
     
-    func ProcessFaceDetection(faces: [Face]) {
-        "\(#function) not implemented (\(Name))".log(.Verbose)
-    }
+//    func ProcessFaceDetection(faces: [Face]) {
+//        "\(#function) not implemented (\(Name))".log(.Verbose)
+//    }
     
     func ProcessTextRecognition(/*text: Text*/) {
         "\(#function) not implemented (\(Name))".log(.Verbose)
@@ -432,11 +433,11 @@ class ScanPhase<T>: CameraDelegate, HandleMLKitResponse {
     
     
     // MARK: ML Kit Response Delegate
-    final func handleFaceDetectionResult(_ result: [Face]) {
-        guard Status == .PhaseProcessing else { return }
-        
-        ProcessFaceDetection(faces: result)
-    }
+//    final func handleFaceDetectionResult(_ result: [Face]) {
+//        guard Status == .PhaseProcessing else { return }
+//        
+//        ProcessFaceDetection(faces: result)
+//    }
     
     final func handleTextRecognitionResult(/*_ result: Text*/) {
         guard Status == .PhaseProcessing else { return }
